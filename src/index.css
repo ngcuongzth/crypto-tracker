@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dark-theme {
+  --color-bg-primary: #2d3748;
+  --color-bg-secondary: #283141;
+  --color-text-primary: #dbdbdb;
+  --color-text-secondary: #e2e8f0;
+  --color-text-accent: #81e6d9;
+  --color-bg-input: #4a5361;
+  --color-bg-button: #81e6d9;
+  --color-label: "#6b7280 ";
+}
+
+.light-theme {
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #edf2f7;
+  --color-text-primary: #2d3748;
+  --color-text-secondary: #4a5568;
+  --color-text-accent: #2b6cb0;
+  --color-bg-input: #edf2f7;
+  --color-bg-button: #2b6cb0;
+  --color-label: "#6b7280 ";
+}
+
+@layer base {
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    @apply bg-primary text-primary antialiased;
+  }
+  img,
+  picture,
+  svg,
+  video {
+    display: block;
+    max-width: 100%;
+  }
+  svg {
+    @apply bg-transparent;
+  }
+  body {
+    min-height: 100vh;
+  }
+  ,
+  img {
+    object-fit: cover;
+  }
+  .rounded-div {
+    @apply border border-secondary  shadow-xl bg-primary px-2
+  max-w-[1200px] w-full mx-auto;
+  }
+
+  .hover-svg-fill:hover svg {
+    @apply fill-hover-color;
+  }
+  .btn-normal {
+    @apply p-1 hover:bg-secondary rounded-cycle transition-all ease-linear delay-75 border border-transparent hover:border-hover-color  hover:text-hover-color hover:shadow-2xl;
+  }
+
+  .sidebar-hidden {
+    transform: translateX(-100%);
+  }
+  a,
+  div,
+  span {
+    background-color: transparent;
+  }
+  .link-normal {
+    @apply hover:text-hover-color transition-all ease-linear delay-100 capitalize text-secondary;
+  }
+  .input-custom {
+    @apply text-normal max-w-search-form w-full border 
+                    rounded-xl pl-2 py-1 
+                      transition-all ease-linear delay-75
+                     outline-none
+                    placeholder:font-medium
+                    shadow-lg border-input
+                     focus:border-hover-color;
+  }
+}
