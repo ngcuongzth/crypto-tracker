@@ -1,7 +1,7 @@
 import React from 'react'
 import CoinSearch from '../components/CoinSearch'
 import TrendingCoin from '../components/TrendingCoin'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { fetchCoinMarket, fetchTrendingCoin, } from '../store/features/CoinSlice'
 import TableCoin from '../components/TableCoin'
 const Home = () => {

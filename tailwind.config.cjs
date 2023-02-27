@@ -21,6 +21,7 @@ module.exports = {
         primary: 'var(--color-bg-primary)',
         secondary: 'var(--color-bg-secondary)',
         button: 'var(--color-bg-button)',
+        hover: 'var(--color-item-hover)',
       },
       textColor: {
         accent: 'var(--color-text-accent)',
@@ -30,19 +31,22 @@ module.exports = {
         label: 'var(--color-label)'
       },
       borderColor: {
-        primary: 'var(--color-bg-primary)',
         secondary: 'var(--color-bg-secondary)',
         input: 'var(--color-bg-input)',
-        accent: 'var(--color-bg-accent)'
+        primary: 'var(--color-border)'
       },
       colors: {
         'hover-color': '#8dc647',
         'border-color': 'var(--color-text-primary)',
-        'primary-color': 'var(--color-bg-primary)'
+        'primary-color': 'var(--color-bg-primary)',
+        'hover': 'var(--color-item-hover)'
       },
       width: {
         '40px': '40px',
-        '24px': '24px'
+        '24px': '24px',
+        '200px': '200px',
+        '150px': '150px',
+        '350px': '350px'
       },
       fontSize: {
         'normal': '16px',
@@ -53,6 +57,7 @@ module.exports = {
         'search-form': '500px',
       },
       minWidth: {
+        '200px': '200px'
       },
       spacing: {
         '1': '5px',

@@ -13,7 +13,7 @@ const TrendingCoin = () => {
     return (
         <section className='my-3'>
             <h2 className='capitalize font-bold text-20px mb-4 mt-10'>Trending coins</h2>
-            <div className='grid grid-cols-1  l:grid-cols-3 gap-4'>
+            <div className='grid grid-cols-1  l:grid-cols-2 gap-4'>
                 {trendingCoins.map((coin) => {
                     return <TrendingCoinItem coin={coin.item} key={coin.item.id} />
                 })}

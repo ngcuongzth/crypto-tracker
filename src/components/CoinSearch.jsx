@@ -9,7 +9,7 @@ const CoinSearch = () => {
             </h2>
             <form onSubmit={e => e.preventDefault()}>
                 <input type="text" placeholder='Search a coin...'
-                    className='input-custom bg-primary'
+                    className='input-custom bg-transparent'
                     value={search}
                     onChange={e => setSearch(e.target.value)}
                 />

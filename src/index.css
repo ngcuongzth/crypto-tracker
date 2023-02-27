@@ -3,25 +3,25 @@
 @tailwind utilities;
 
 .dark-theme {
-  --color-bg-primary: #2d3748;
+  --color-bg-primary: #121212;
   --color-bg-secondary: #283141;
   --color-text-primary: #dbdbdb;
   --color-text-secondary: #e2e8f0;
-  --color-text-accent: #81e6d9;
   --color-bg-input: #4a5361;
-  --color-bg-button: #81e6d9;
-  --color-label: "#6b7280 ";
+  --color-label: #6b7280;
+  --color-item-hover: #1e293b;
+  --color-border: #272828;
 }
 
 .light-theme {
   --color-bg-primary: #ffffff;
   --color-bg-secondary: #edf2f7;
-  --color-text-primary: #2d3748;
+  --color-text-primary: #121212;
   --color-text-secondary: #4a5568;
-  --color-text-accent: #2b6cb0;
   --color-bg-input: #edf2f7;
-  --color-bg-button: #2b6cb0;
-  --color-label: "#6b7280 ";
+  --color-label: #6b7280;
+  --color-item-hover: #f3f4f6;
+  --color-border: #e5e7eb;
 }
 
 @layer base {
@@ -65,17 +65,24 @@
     @apply p-1 hover:bg-secondary rounded-cycle transition-all ease-linear delay-75 border border-transparent hover:border-hover-color  hover:text-hover-color hover:shadow-2xl;
   }
 
+  .item-hover-bg {
+    @apply bg-hover;
+  }
+
   .sidebar-hidden {
     transform: translateX(-100%);
   }
+
   a,
   div,
   span {
     background-color: transparent;
   }
+
   .link-normal {
     @apply hover:text-hover-color transition-all ease-linear delay-100 capitalize text-secondary;
   }
+
   .input-custom {
     @apply text-normal max-w-search-form w-full border 
                     rounded-xl pl-2 py-1 
@@ -84,5 +91,8 @@
                     placeholder:font-medium
                     shadow-lg border-input
                      focus:border-hover-color;
+  }
+  .tag {
+    @apply bg-slate-700 rounded-xl font-medium py-1 px-2 text-white;
   }
 }
