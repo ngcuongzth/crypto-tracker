@@ -19,9 +19,9 @@ const AuthProvider = ({ children }) => {
 
     const handleSignUp = (email, password) => {
         createUserWithEmailAndPassword(auth, email, password)
-        return setDoc(doc, (db, 'users', email), {
-            watchList: []
-        })
+        // return setDoc(doc, (db, 'users', email), {
+        //     watchList: []
+        // })
     }
     const handleSignIn = (email, password) => {
         return signInWithEmailAndPassword(auth, email, password)
