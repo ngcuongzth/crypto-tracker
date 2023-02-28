@@ -45,9 +45,9 @@ const CoinItem = ({ coin }) => {
             <td className='hidden s:table-cell bg-transparent'>
                 <div className={`flex items-center ${price_change_percentage_1h_in_currency > 0 ? 'text-hover-color p-2 ' : 'text-red-600 p-2 '}`}>
                     {price_change_percentage_1h_in_currency > 0 ?
-                        <MdOutlineArrowDropUp size={20} />
+                        <MdOutlineArrowDropUp size={20} fill="#7acc16" />
                         :
-                        <MdOutlineArrowDropDown size={20} />
+                        <MdOutlineArrowDropDown size={20} fill="#dc2626" />
                     }
                     {(price_change_percentage_1h_in_currency).toFixed(1)}%
                 </div>
@@ -56,9 +56,9 @@ const CoinItem = ({ coin }) => {
             <td className='hidden s:table-cell bg-transparent'>
                 <div className={`flex items-center p-2 ${price_change_percentage_24h_in_currency > 0 ? 'text-hover-color  ' : 'text-red-600'}`}>
                     {price_change_percentage_24h_in_currency > 0 ?
-                        <MdOutlineArrowDropUp size={20} />
+                        <MdOutlineArrowDropUp size={20} fill="#7acc16" />
                         :
-                        <MdOutlineArrowDropDown size={20} />
+                        <MdOutlineArrowDropDown size={20} fill="#dc2626" />
                     }
                     {(price_change_percentage_24h_in_currency).toFixed(1)}%
                 </div>
@@ -67,9 +67,9 @@ const CoinItem = ({ coin }) => {
             <td className='hidden s:table-cell bg-transparent'>
                 <div className={`flex items-center p-2 ${price_change_percentage_7d_in_currency > 0 ? 'text-hover-color ' : 'text-red-600 '}`}>
                     {price_change_percentage_7d_in_currency > 0 ?
-                        <MdOutlineArrowDropUp size={20} />
+                        <MdOutlineArrowDropUp size={20} fill="#7acc16" />
                         :
-                        <MdOutlineArrowDropDown size={20} />
+                        <MdOutlineArrowDropDown size={20} fill="#dc2626" />
                     }
                     {(price_change_percentage_7d_in_currency).toFixed(1)}%
                 </div>

@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import SharedLayout from './components/SharedLayout'
-import { HomePage, AccountPage, CoinPagePage, SignInPage, SignUpPage, ErrorPage, SingleCoinPage } from './routes'
+import { HomePage, AccountPage, SignInPage, SignUpPage, ErrorPage, SingleCoinPage } from './routes'
 
 const App = () => {
     return (
@@ -10,7 +10,6 @@ const App = () => {
                 <Route path="/" element={<SharedLayout />}>
                     <Route element={<HomePage />} index />
                     <Route element={<AccountPage />} path="account" />
-                    <Route element={<CoinPagePage />} path="coin" />
                     <Route element={<SignInPage />} path="sign-in" />
                     <Route element={<SignUpPage />} path="sign-up" />
                     <Route element={<SingleCoinPage />} path="coins/:idCoin" />

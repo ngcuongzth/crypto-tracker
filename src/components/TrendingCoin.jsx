@@ -11,7 +11,7 @@ import { MdCategory, MdAddchart } from 'react-icons/md'
 const TrendingCoin = () => {
     const { trendingCoins } = useSelector(state => state.coin)
     return (
-        <section className='my-3'>
+        <section className='my-3 pb-8'>
             <h2 className='capitalize font-bold text-20px mb-4 mt-10'>Trending coins</h2>
             <div className='grid grid-cols-1  l:grid-cols-2 gap-4'>
                 {trendingCoins.map((coin) => {

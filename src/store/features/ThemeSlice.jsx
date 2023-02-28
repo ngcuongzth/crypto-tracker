@@ -10,7 +10,7 @@ const ThemeSlice = createSlice({
         getInitialTheme: (state) => {
             const theme = localStorage.getItem('theme')
             // default theme
-            if (theme && typeof theme !== 'string') {
+            if (theme) {
                 state.colorTheme = theme;
             }
             else {
@@ -21,9 +21,11 @@ const ThemeSlice = createSlice({
         toggleTheme: (state) => {
             if (state.colorTheme === 'dark-theme') {
                 state.colorTheme = 'light-theme'
+                localStorage.setItem('theme', 'light-theme')
             }
             else {
                 state.colorTheme = 'dark-theme'
+                localStorage.setItem('theme', 'dark-theme')
             }
         }
     },

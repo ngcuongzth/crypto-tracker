@@ -1,6 +1,7 @@
 import React from 'react'
 import formatPrice from '../utils/formatPrice'
-import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai'
+import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineStar, AiFillStar, AiOutlineCopy, AiOutlineShareAlt } from 'react-icons/ai'
+
 const OverviewCoin = ({ data }) => {
     const { name, image, symbol, market_cap_rank: rank, market_data
     } = data
@@ -24,6 +25,20 @@ const OverviewCoin = ({ data }) => {
                         {market_data.price_change_percentage_24h_in_currency.usd.toFixed(2)}%
                     </span>
                 }
+            </div>
+            <div className='flex gap-2 mt-2'>
+                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
+                    <AiOutlineStar size={22} />
+                </button>
+                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
+                    <AiFillStar size={22} fill="#fc6" />
+                </button>
+                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
+                    <AiOutlineCopy size={22} />
+                </button>
+                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
+                    <AiOutlineShareAlt size={22} />
+                </button>
             </div>
             <div className='mt-4 flex flex-col  font-medium capitalize text-sm l:grid grid-cols-2 gap-x-6'>
                 <div className='flex justify-between py-2 border-b border-primary '>

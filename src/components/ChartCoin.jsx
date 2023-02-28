@@ -18,7 +18,7 @@ const ChartCoin = ({ data }) => {
             </Sparklines>
             <div className='mt-4'>
                 <h3 className='text-label uppercase font-bold text-lg mb-2 block'>Price Statistics</h3>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         24h Low / 24h High
                     </span>
@@ -26,7 +26,7 @@ const ChartCoin = ({ data }) => {
                         {formatPrice(market_data.low_24h.usd)} / {formatPrice(market_data.high_24h.usd)}
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Trading Volume
                     </span>
@@ -34,7 +34,7 @@ const ChartCoin = ({ data }) => {
                         {formatPrice(market_data.total_volume.usd)}
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Market Cap
                     </span>
@@ -42,7 +42,7 @@ const ChartCoin = ({ data }) => {
                         {formatPrice(market_data.market_cap.usd)}
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Volume / Market Cap
                     </span>
@@ -50,7 +50,7 @@ const ChartCoin = ({ data }) => {
                         {(market_data.total_volume.usd / market_data.market_cap.usd).toFixed(2)}%
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Price change (24h)
                     </span>
@@ -60,7 +60,7 @@ const ChartCoin = ({ data }) => {
                         {(market_data.price_change_percentage_24h).toFixed(2)}%
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Price change (7 day)
                     </span>
@@ -70,7 +70,7 @@ const ChartCoin = ({ data }) => {
                         {(market_data.price_change_percentage_7d).toFixed(2)}%
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Price change (1 month)
                     </span>
@@ -80,7 +80,7 @@ const ChartCoin = ({ data }) => {
                         {(market_data.price_change_percentage_30d).toFixed(2)}%
                     </span>
                 </div>
-                <div className='text-sm font-medium flex justify-between'>
+                <div className='text-sm font-medium flex justify-between py-2 border-b border-primary'>
                     <span className='font-normal opacity-80'>
                         Price change (1 year)
                     </span>
