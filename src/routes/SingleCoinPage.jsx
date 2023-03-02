@@ -24,7 +24,7 @@ const SingleCoinPage = () => {
                     <OverviewCoin data={coin} />
                     <InfoCoin data={coin} />
                 </div>
-                <div className="grid m:grid-cols-2 gap-6 grid-cols-1 mt-4">
+                <div className="grid m:grid-cols-2 gap-6 grid-cols-1 mt-16">
                     <ChartCoin data={coin} />
                     <DescriptionCoin data={coin} />
                 </div>

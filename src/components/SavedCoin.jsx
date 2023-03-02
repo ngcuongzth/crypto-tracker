@@ -6,9 +6,9 @@ const SavedCoin = () => {
     return (
         <div>
             {coins.length <= 0 ?
-                <p className='bg-transparent'>
-                    You don't have any coins saved. Please save a coin to add it to your watch list
-                    <Link to="/">Click here ti search coins</Link>
+                <p className='bg-transparent flex gap-1 flex-col mt-4 text-sm'>
+                    You don't have any coins saved. Please save a coin to add it to your watch list ❗
+                    <Link className='text-hover-color font-medium' to="/">Click here to search coins</Link>
                 </p>
                 : (
                     <table className='w-fill border-collapse text-center'>

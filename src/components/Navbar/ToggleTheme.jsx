@@ -15,7 +15,7 @@ const ToggleTheme = () => {
                 className={colorTheme === 'light-theme' ? 'font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl' : 'hidden'}>
                 <HiMoon size={24} className="bg-transparent" />
                 <span className='hidden l:block'>
-                    Dark theme
+                    Dark
                 </span>
             </button>
             <button
@@ -23,7 +23,7 @@ const ToggleTheme = () => {
                 className={colorTheme === 'dark-theme' ? 'font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl' : 'hidden'}>
                 <HiSun size={24} className="bg-transparent" />
                 <span className='hidden l:block'>
-                    Light theme
+                    Light
                 </span>
             </button>
         </div>

@@ -8,7 +8,7 @@ const ChartCoin = ({ data }) => {
     return (
         <section>
             <h3 className='capitalize font-medium text-2xl mb-2'>Bitcoin Price Chart </h3>
-            <span className='text-label uppercase font-bold text-lg mb-2 block'>7day</span>
+            <span className='text-label uppercase  text-[18px] mb-2 block'>7day</span>
             <Sparklines data={market_data.sparkline_7d.price} >
                 <SparklinesLine color={
                     market_data.price_change_percentage_7d_in_currency.usd > 0 ? '#7acc16' : '#dc2626'

@@ -10,37 +10,54 @@ import {
 import { doc, setDoc } from 'firebase/firestore'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../store/features/AuthSlice'
-
+import { toast } from 'react-toastify'
 
 const UserContext = createContext()
 
 const AuthProvider = ({ children }) => {
     const dispatch = useDispatch()
-
-    const handleSignUp = (email, password) => {
-        createUserWithEmailAndPassword(auth, email, password)
-        // return setDoc(doc, (db, 'users', email), {
-        //     watchList: []
-        // })
-    }
+    // handle sign in 
     const handleSignIn = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+        return signInWithEmailAndPassword(auth, email, password);
+    };
+    // handle sign up
+    const handleSignUp = async (email, password) => {
+        // setDoc - đối số thứ nhất là docRef
+        // - đối số thứ hai là data 
 
+        // docRef là giá trị trả về của hàm doc
+        // với đối số truyền vào là db, 
+        // await setDoc(doc(db, 'user', email), {
+        //     watchList: [],
+        // });
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
+    // handle sign out
     const handleSignOut = () => {
-        return signOut(auth)
+        signOut(auth).then(() => {
+            dispatch(setUser(null))
+            toast.success('Logged out')
+        }).catch((error) => {
+            console.log(error)
+        });
     }
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            dispatch(setUser({
-                displayName: currentUser.displayName,
-                email: currentUser.email,
-            }))
-        })
+            if (currentUser) {
+                dispatch(setUser({
+                    name: currentUser.displayName || currentUser.email,
+                    email: currentUser.email,
+                    photoUrl: currentUser.photoURL || null
+                }))
+            }
+            else {
+                setUser(null)
+            }
+        });
         return () => {
-            unsubscribe()
-        }
+            unsubscribe();
+        };
     }, [])
 
     return (

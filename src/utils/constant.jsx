@@ -1,5 +1,6 @@
-import { HiHome, HiKey } from 'react-icons/hi'
+import { HiHome } from 'react-icons/hi'
 import { SiBitcoin } from 'react-icons/si'
+import { MdAllInclusive, MdQueryStats } from 'react-icons/md'
 export const navLinks = [
     {
         id: 1,
@@ -15,17 +16,16 @@ export const navLinks = [
     },
     {
         id: 3,
-        title: 'Home',
+        title: 'Exchanges',
         path: '/',
-        icon: HiHome
+        icon: MdQueryStats
     },
     {
         id: 4,
-        title: 'Coin',
-        path: '/coin',
-        icon: SiBitcoin
+        title: 'NTF',
+        path: '/',
+        icon: MdAllInclusive
     },
-
 ]
 
 export const footerLinks = [

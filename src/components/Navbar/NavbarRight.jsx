@@ -4,28 +4,39 @@ import ToggleTheme from './ToggleTheme'
 import { HiBars3BottomLeft } from "react-icons/hi2";
 import { useDispatch } from 'react-redux';
 import { toggleSidebar } from '../../store/features/LayoutSlice';
+import { useSelector } from 'react-redux';
+import user_default from '../../assets/images/user-img-default.png'
 const NavbarRight = () => {
+
+    const { user } = useSelector(state => state.auth)
 
     const dispatch = useDispatch();
     return (
         <section className=' flex items-center gap-3'>
             <ToggleTheme />
             <div className='hidden items-center gap-3 l:flex '>
-                <Link to="/account" className='link-normal text-normal  font-medium'>
-                    <button>
-                        Account
-                    </button>
-                </Link>
-                <Link to="/sign-in" className='link-normal text-normal  font-medium'>
-                    <button>
-                        Sign In
-                    </button>
-                </Link>
-                <Link to="/sign-up" className='link-normal text-normal  font-medium'>
-                    <button>
-                        Sign up
-                    </button>
-                </Link>
+                {user &&
+                    <Link to="/account" className='link-normal text-normal  font-medium '>
+                        <button className='flex items-center gap-1'>
+                            Your Profile
+                            <img className='w-6 h-6' src={user.photoUrl || user_default} alt="user-thumb" />
+                        </button>
+                    </Link>
+                }
+                {!user &&
+                    <>
+                        <Link to="/sign-in" className='link-normal text-normal  font-medium'>
+                            <button>
+                                Sign In
+                            </button>
+                        </Link>
+                        <Link to="/sign-up" className='link-normal text-normal  font-medium'>
+                            <button>
+                                Sign up
+                            </button>
+                        </Link>
+                    </>
+                }
             </div>
             <button
                 onClick={() => dispatch(toggleSidebar())}

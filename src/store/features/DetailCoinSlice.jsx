@@ -25,6 +25,7 @@ const DetailCoinSlice = createSlice({
     name: 'detail_coin',
     reducers: {
         setCoinId: (state, action) => {
+            state.coin = null;
             state.idCoin = action.payload
         }
     },

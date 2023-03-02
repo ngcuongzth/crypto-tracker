@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import formatPrice from '../utils/formatPrice'
-import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineStar, AiFillStar, AiOutlineCopy, AiOutlineShareAlt } from 'react-icons/ai'
+import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineStar, AiFillStar, AiOutlineCopy, AiOutlineShareAlt, AiFillFacebook, AiOutlineTwitter } from 'react-icons/ai'
+import { toast } from 'react-toastify'
+
+
 
 const OverviewCoin = ({ data }) => {
+    const [shareFormOpen, setShareFormOpen] = useState(false)
+    const handleCopyCoinHref = () => {
+        const hrefCoin = window.location.href;
+        navigator.clipboard.writeText(hrefCoin)
+        toast.success('Copied coin link!')
+    }
+
+
     const { name, image, symbol, market_cap_rank: rank, market_data
     } = data
     return (
@@ -26,6 +37,7 @@ const OverviewCoin = ({ data }) => {
                     </span>
                 }
             </div>
+            <span className='text-[18px] text-label'>(24H)</span>
             <div className='flex gap-2 mt-2'>
                 <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
                     <AiOutlineStar size={22} />
@@ -33,12 +45,32 @@ const OverviewCoin = ({ data }) => {
                 <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
                     <AiFillStar size={22} fill="#fc6" />
                 </button>
-                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
+                <button
+                    onClick={() => { handleCopyCoinHref() }}
+                    className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
                     <AiOutlineCopy size={22} />
                 </button>
-                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
-                    <AiOutlineShareAlt size={22} />
-                </button>
+                <div className='relative'>
+                    <button
+                        onClick={() => {
+                            setShareFormOpen(!shareFormOpen)
+                        }}
+                        className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
+                        <AiOutlineShareAlt size={22} />
+                    </button>
+                    <div className={`px-2 py-2 absolute left-0 top-[111%] min-w-[250px] bg-primary-color border rounded-l z-10 ${shareFormOpen ? 'block' : 'hidden'}`}>
+                        <div onClick={() => {
+                            setShareFormOpen(!shareFormOpen)
+                        }} className='flex items-center gap-1 px-2 py-1 hover:bg-secondary cursor-pointer transition-colors delay-[50]  hover:text-hover-color hover-svg-fill'>
+                            <AiFillFacebook size={20} className="" />
+                            Share on Facebook</div>
+                        <div onClick={() => {
+                            setShareFormOpen(!shareFormOpen)
+                        }} className='flex items-center gap-1 px-2 py-1 hover:bg-secondary cursor-pointer transition-colors delay-[50]  hover:text-hover-color hover-svg-fill'>
+                            <AiOutlineTwitter size={20} className="" />
+                            Share on Twitter</div>
+                    </div>
+                </div>
             </div>
             <div className='mt-4 flex flex-col  font-medium capitalize text-sm l:grid grid-cols-2 gap-x-6'>
                 <div className='flex justify-between py-2 border-b border-primary '>
