@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import logo from '../../assets/logo.svg'
 import { navLinks } from '../../utils/constant'
 
+
 const NavbarLeft = () => {
     return (
         <section className='flex gap-3 items-center'>

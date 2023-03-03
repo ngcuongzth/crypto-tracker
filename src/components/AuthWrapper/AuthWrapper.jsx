@@ -5,41 +5,88 @@ import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
+    signInWithPopup
 } from 'firebase/auth'
 import { doc, setDoc } from 'firebase/firestore'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../store/features/AuthSlice'
 import { toast } from 'react-toastify'
+import { googleProvider } from '../../firebase'
 
 const UserContext = createContext()
 
 const AuthProvider = ({ children }) => {
     const dispatch = useDispatch()
-    // handle sign in 
-    const handleSignIn = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password);
-    };
-    // handle sign up
-    const handleSignUp = async (email, password) => {
-        // setDoc - đối số thứ nhất là docRef
-        // - đối số thứ hai là data 
 
-        // docRef là giá trị trả về của hàm doc
-        // với đối số truyền vào là db, 
-        // await setDoc(doc(db, 'user', email), {
-        //     watchList: [],
-        // });
-        return createUserWithEmailAndPassword(auth, email, password);
-    };
+    // login with email & password
+    const handleLogin = async (email, password) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password)
+        }
+        catch (err) {
+            let errorMessage;
+            if (err.message === "Firebase: Error (auth/invalid-email).") {
+                errorMessage = 'Invalid email ❌'
+            }
+            else if (err.message === "Firebase: Error (auth/user-not-found).") {
+                errorMessage = 'User not found ❌'
+            }
+            else if (err.message === "Firebase: Error (auth/wrong-password).") {
+                errorMessage = 'Wrong password ❌'
+            }
+            else if (err.message === "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests).") {
+                errorMessage = 'Access to this account has been temporarily disabled due to many failed login attempts ❌'
+            }
+            return errorMessage
+        }
+    }
+
+    // register with email & password
+    const handleRegister = async (email, password) => {
+        try {
+            await createUserWithEmailAndPassword(auth, email, password)
+            await setDoc(doc(db, 'users', email), {
+                watchList: []
+            })
+            return false;
+        }
+        catch (error) {
+            let errorMessage;
+            if (error.message === "Firebase: Password should be at least 6 characters (auth/weak-password).") {
+                errorMessage = "Password should be at least 6 characters ❌"
+            }
+            else if (error.message === "Firebase: Error (auth/invalid-email).") {
+                errorMessage = 'Invalid email ❌'
+            }
+            else if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+                errorMessage = 'Email already in use ❌'
+            }
+            return errorMessage
+        }
+    }
+
     // handle sign out
-    const handleSignOut = () => {
-        signOut(auth).then(() => {
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth)
             dispatch(setUser(null))
             toast.success('Logged out')
-        }).catch((error) => {
-            console.log(error)
-        });
+        }
+        catch (error) {
+            return error.message
+        }
+    }
+
+
+    // login with google
+    const handleSignInWithGoogle = async () => {
+        try {
+            await signInWithPopup(auth, googleProvider)
+        }
+        catch (err) {
+            return err.message
+        }
     }
 
     useEffect(() => {
@@ -62,7 +109,7 @@ const AuthProvider = ({ children }) => {
 
     return (
         <UserContext.Provider value={{
-            handleSignIn, handleSignUp, handleSignOut
+            handleLogin, handleSignOut, handleRegister, handleSignInWithGoogle
         }}>
             {children}
         </UserContext.Provider>

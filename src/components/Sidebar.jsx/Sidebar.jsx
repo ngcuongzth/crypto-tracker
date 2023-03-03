@@ -9,11 +9,25 @@ import { useDispatch, useSelector } from 'react-redux'
 import { closeSidebar } from '../../store/features/LayoutSlice'
 import user_default from '../../assets/images/user-img-default.png'
 import { useAuthContext } from '../AuthWrapper/AuthWrapper'
+import { toast } from 'react-toastify'
+
+
 const Sidebar = () => {
     const dispatch = useDispatch()
     const { isSidebarOpen } = useSelector(state => state.layout)
     const { user } = useSelector(state => state.auth)
     const { handleSignOut } = useAuthContext()
+
+    const handleLogOut = async () => {
+        const errorMessage = handleSignOut()
+        if (errorMessage) {
+            toast.error(errorMessage)
+        }
+        else {
+            navigate('/sign-in')
+        }
+    }
+
     return (
         <aside className={`${isSidebarOpen ? 'l:hidden fixed top-0 bottom-0 right-0 left-0 z-50 transition-all delay-150 ease-linear' : 'sidebar-hidden fixed top-0 bottom-0 right-0 left-0 z-50 transition-all delay-150 ease-linear'}`}>
             <dir className="py-2 px-6 h-full ">
@@ -70,15 +84,15 @@ const Sidebar = () => {
                                 onClick={() => dispatch(closeSidebar())}
                                 className='flex items-center text-normal py-2 justify-center gap-1 border rounded-xl transition-all ease-linear delay-75 font-medium bg-primary-color hover:opacity-80'>
                                 {/* <FaKey size={24} className="bg-transparent " /> */}
-                                <img src={user.photoUrl || user_default} alt="user-img-default"
-                                    className='w-6 h-6 bg-transparent'
+                                <img src={user.photoUrl || user_default} alt="user-img"
+                                    className='w-6 h-6 bg-transparent rounded-[50%]'
                                 />
                                 Your Profile
                             </Link>
                             <button
                                 onClick={() => {
                                     dispatch(closeSidebar())
-                                    handleSignOut()
+                                    handleLogOut()
                                 }}
                                 className='flex items-center text-normal py-2 justify-center gap-1 border rounded-xl transition-all ease-linear delay-75 font-medium bg-primary-color hover:opacity-80'>
                                 <FaSignOutAlt size={24} />

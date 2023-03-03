@@ -1,31 +1,41 @@
 import React, { useState } from 'react'
-import { AiOutlineMail, AiOutlineLock } from 'react-icons/ai'
+import { AiOutlineMail, AiOutlineLock, AiOutlineGoogle } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from './AuthWrapper/AuthWrapper'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 
 const SignInForm = () => {
-    const { handleSignIn } = useAuthContext()
+    const { handleLogin, handleSignInWithGoogle } = useAuthContext()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         setError('');
-        try {
-            await handleSignIn(email, password);
+        const errorMessage = await handleLogin(email, password)
+        if (errorMessage) {
+            setError(errorMessage)
+            toast.error(errorMessage)
+        }
+        else {
+            toast.success('Signed in ❕')
             navigate('/account')
-            toast.success('Logged in successfully ☑️')
-        } catch (e) {
-            setError(e.message);
-            toast.error(` ${e.message} ❌`)
         }
     };
 
+    const loginWithGoogle = async () => {
+        const errorMessage = await handleSignInWithGoogle()
+        if (errorMessage) {
+            setError(errorMessage)
+            toast.error(errorMessage)
+        }
+        else {
+            toast.success('Signed in')
+            navigate('/account')
+        }
+    }
     return (
         <div className='max-w-[400px] mx-auto min-h-[600px] px-4 py-20'>
             <h1 className='capitalize text-2xl text-center font-bold opacity-70'>
@@ -35,7 +45,14 @@ const SignInForm = () => {
                 {error}
             </p>}
             <form onSubmit={(e) => {
-                handleSubmit(e)
+                e.preventDefault()
+                if (!email || !password) {
+                    toast.warning('Please enter enough information')
+                    setError('Please enter enough information')
+                }
+                else {
+                    handleSubmit(e)
+                }
             }
             }>
                 <div className='mb-2'>
@@ -65,7 +82,7 @@ const SignInForm = () => {
                     </div>
                 </div>
                 <div>
-                    <button className='w-full py-1 px-2 bg-hover-color rounded-2xl text-white font-semibold mt-2 hover:opacity-80 transition-all delay-75 shadow-xl'>Sign in</button>
+                    <button className='w-full py-[8px] px-2 bg-hover-color rounded-2xl text-white font-semibold mt-2 hover:opacity-80 transition-all delay-75 shadow-xl'>Sign in</button>
                 </div>
                 <div className='flex gap-1 px-2 py-1 mt-2'>
                     <h3 className='font-medium text-sm bg-transparent'>Don't have an account?</h3>
@@ -78,6 +95,19 @@ const SignInForm = () => {
 
                 </div>
             </form>
+            <div className='flex flex-col items-center mt-2'>
+                <span className=' font-medium'>
+                    OR
+                </span>
+                <button className='w-full flex flex-row items-center justify-center gap-1 py-[8px] px-2 rounded-2xl text-white font-semibold mt-2 hover:opacity-80 transition-all delay-75 shadow-xl bg-[#3598db]'
+                    onClick={() => {
+                        loginWithGoogle()
+                    }}
+                >
+                    <AiOutlineGoogle size={20} fill={'white'} />
+                    Sign in with Google
+                </button>
+            </div>
         </div>
     )
 }

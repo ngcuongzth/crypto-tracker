@@ -5,34 +5,27 @@ import { useState } from 'react'
 import { useAuthContext } from './AuthWrapper/AuthWrapper'
 import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { doc, setDoc } from 'firebase/firestore'
-import { db } from '../firebase'
 
 
 const SignUpForm = () => {
-    const { handleSignUp } = useAuthContext()
+    const { handleRegister } = useAuthContext()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async () => {
         setError('')
-        try {
-            await handleSignUp(email, password);
-            // setDoc(doc(db, 'users', email), {
-            //     watchList: [],
-            // });
+        const errorMessage = await handleRegister(email, password)
+        if (!errorMessage) {
             navigate('/account')
-            toast.success('Created new account ☑️')
-        } catch (e) {
-            setError(e.message);
-            toast.error(` ${e.message} ❌`)
+            toast.success('Registered ❕')
+        }
+        else {
+            setError(errorMessage)
+            toast.error(errorMessage)
         }
     }
-
     return (
         <div className='max-w-[400px] mx-auto min-h-[600px] px-4 py-20'>
             <h1 className='capitalize text-2xl text-center font-bold opacity-70 mb-6'>
@@ -43,7 +36,14 @@ const SignUpForm = () => {
             </p>}
             <form onSubmit={
                 (e) => {
-                    handleSubmit(e)
+                    e.preventDefault()
+                    if (!email || !password) {
+                        toast.warning('Please enter enough information')
+                        setError('Please enter enough information')
+                    }
+                    else {
+                        handleSubmit(e)
+                    }
                 }
             }>
                 <div className='mb-2'>
@@ -75,7 +75,7 @@ const SignUpForm = () => {
                 </div>
                 <div>
                     <button
-                        className='w-full py-1 px-2 bg-hover-color rounded-2xl text-white font-semibold mt-2 hover:opacity-80 transition-all delay-75 shadow-xl'>Sign up</button>
+                        className='w-full py-[8px] px-2 bg-hover-color rounded-2xl text-white font-semibold mt-2 hover:opacity-80 transition-all delay-75 shadow-xl'>Sign up</button>
                 </div>
                 <div className='flex gap-1 px-2 py-1 mt-2'>
                     <h3 className='font-medium text-sm bg-transparent'>Already have an account?</h3>
