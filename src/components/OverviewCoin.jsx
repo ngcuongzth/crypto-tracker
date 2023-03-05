@@ -1,21 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import formatPrice from '../utils/formatPrice'
-import { AiOutlineCaretDown, AiOutlineCaretUp, AiOutlineStar, AiFillStar, AiOutlineCopy, AiOutlineShareAlt, AiFillFacebook, AiOutlineTwitter } from 'react-icons/ai'
+import {
+    AiOutlineCaretDown, AiOutlineCaretUp,
+    AiOutlineStar, AiFillStar, AiOutlineCopy,
+    AiOutlineShareAlt, AiFillFacebook, AiOutlineTwitter
+} from 'react-icons/ai'
 import { toast } from 'react-toastify'
-
+import { useSelector } from 'react-redux'
+import { useAuthContext } from './AuthWrapper/AuthWrapper'
 
 
 const OverviewCoin = ({ data }) => {
     const [shareFormOpen, setShareFormOpen] = useState(false)
+    const { watchList } = useSelector(state => state.auth)
+    const [isSaved, setIsSaved] = useState(false)
+    const { id, name, image, symbol, market_cap_rank: rank, market_data
+    } = data
+    const { handleAddToWatchList, handleRemoveFromWatchList } = useAuthContext()
+
+    useEffect(() => {
+        const isSaved = watchList.find((coin) => {
+            return coin.id === id
+        })
+        setIsSaved(Boolean(isSaved))
+    }, [watchList])
+
     const handleCopyCoinHref = () => {
         const hrefCoin = window.location.href;
         navigator.clipboard.writeText(hrefCoin)
         toast.success('Copied coin link!')
     }
-
-
-    const { name, image, symbol, market_cap_rank: rank, market_data
-    } = data
     return (
         <section className='xl:w-8/12'>
             <span className='text-white py-1 px-2 font-medium rounded-2xl bg-slate-700 '>Rank#{rank}</span>
@@ -39,12 +53,23 @@ const OverviewCoin = ({ data }) => {
             </div>
             <span className='text-[18px] text-label'>(24H)</span>
             <div className='flex gap-2 mt-2'>
-                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
-                    <AiOutlineStar size={22} />
-                </button>
-                <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>
-                    <AiFillStar size={22} fill="#fc6" />
-                </button>
+                {isSaved ?
+                    <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'
+                        onClick={() => {
+                            handleRemoveFromWatchList(id, watchList)
+                        }}
+                    >
+                        <AiFillStar size={22} fill="#fc6" />
+                    </button>
+                    :
+                    <button className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'
+                        onClick={() => {
+                            handleAddToWatchList(data, setIsSaved)
+                        }}
+                    >
+                        <AiOutlineStar size={22} />
+                    </button>
+                }
                 <button
                     onClick={() => { handleCopyCoinHref() }}
                     className='font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl'>

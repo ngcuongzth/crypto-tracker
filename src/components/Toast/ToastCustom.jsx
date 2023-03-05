@@ -13,7 +13,11 @@ const ToastCustom = () => {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
+        theme='colored'
+    // style={{
+    //     color: 'black',
+    //     background: 'white'
+    // }}
     />
 }
 

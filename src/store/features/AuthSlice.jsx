@@ -4,7 +4,6 @@ const initialState = {
     isSignIn: false,
     user: null,
     watchList: [],
-    error: null
 }
 const AuthSlice = createSlice({
     name: 'auth',
@@ -14,9 +13,14 @@ const AuthSlice = createSlice({
             state.user = action.payload
             state.error = null
         },
-
+        updateWatchList: (state, action) => {
+            state.watchList = action.payload
+        },
+        setDefaultWatchList: (state) => {
+            state.watchList = []
+        }
     }
 })
 
 export default AuthSlice.reducer
-export const { setUser } = AuthSlice.actions
+export const { setUser, updateWatchList, setDefaultWatchList } = AuthSlice.actions

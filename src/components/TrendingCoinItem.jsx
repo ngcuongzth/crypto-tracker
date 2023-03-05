@@ -13,7 +13,7 @@ const TrendingCoinItem = ({ coin }) => {
                         <p className='bg-transparent text-secondary text-xs font-medium capitalize'>{symbol}</p>
                     </div>
                     <div className='flex items-center gap-1'>
-                        <img src={small} className="w-3 h-3" alt={id} />
+                        <img src={small} className="w-3 h-3 bg-transparent" alt={id} />
                         <p className='text-sm text-hover-color bg-transparent'>${price_btc.toFixed(7)}</p>
                     </div>
                 </div>

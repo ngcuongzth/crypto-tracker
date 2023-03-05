@@ -22,6 +22,7 @@ module.exports = {
         secondary: 'var(--color-bg-secondary)',
         button: 'var(--color-bg-button)',
         hover: 'var(--color-item-hover)',
+        input: 'var(--color-bg-input)'
       },
       textColor: {
         accent: 'var(--color-text-accent)',

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { AiOutlineMail, AiOutlineLock, AiOutlineGoogle } from 'react-icons/ai'
+import { AiOutlineGoogle } from 'react-icons/ai'
+import { FiMail, FiLock } from 'react-icons/fi'
+
 import { useNavigate } from 'react-router-dom'
 import { useAuthContext } from './AuthWrapper/AuthWrapper'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 
 const SignInForm = () => {
-    const { handleLogin, handleSignInWithGoogle } = useAuthContext()
+    const { handleLogin } = useAuthContext()
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
     const [error, setError] = useState('')
@@ -38,7 +40,7 @@ const SignInForm = () => {
     }
     return (
         <div className='max-w-[400px] mx-auto min-h-[600px] px-4 py-20'>
-            <h1 className='capitalize text-2xl text-center font-bold opacity-70'>
+            <h1 className='capitalize text-2xl text-center font-bold mb-4 '>
                 sign in
             </h1>
             {error && <p className='text-sm text-red-600 font-medium py-1 px-2'>
@@ -58,27 +60,27 @@ const SignInForm = () => {
                 <div className='mb-2'>
                     <label className="mb-2 bg-transparent px-2 py-1 font-semibold"
                         htmlFor="email">Email</label>
-                    <div className='flex justify-between items-center rounded-xl shadow-2xl pr-2'>
+                    <div className='flex justify-between items-center rounded-xl shadow-2xl  relative'>
                         <input type="email" id="email" placeholder='Enter your email'
-                            className='border-none outline-none w-full border border-transparent
-                             px-2 py-1 '
+                            className='outline-none w-full border-2 border-transparent
+                             px-2 py-1 focus:border-hover-color rounded-2xl bg-input'
                             value={email}
                             onChange={e => setEmail(e.target.value)}
                         />
-                        <AiOutlineMail size={20} />
+                        <FiMail size={20} className="absolute right-2" />
                     </div>
                 </div>
                 <div className='mb-2'>
                     <label
                         className='bg-transparent mb-2 py-1 font-semibold px-2'
                         htmlFor="password">Password</label>
-                    <div className='flex justify-between items-center rounded-2xl shadow-xl pr-2'>
+                    <div className='flex justify-between items-center rounded-2xl shadow-xl relative'>
                         <input type="password" id="password" placeholder='Enter your password'
-                            className='border-none outline-none w-full border border-transparent
-                             px-2 py-1'
+                            className='outline-none w-full border-2 border-transparent
+                             px-2 py-1 focus:border-hover-color rounded-2xl bg-input'
                             onChange={e => setPassword(e.target.value)}
                         />
-                        <AiOutlineLock size={20} />
+                        <FiLock size={20} className='absolute right-2' />
                     </div>
                 </div>
                 <div>
@@ -95,19 +97,6 @@ const SignInForm = () => {
 
                 </div>
             </form>
-            <div className='flex flex-col items-center mt-2'>
-                <span className=' font-medium'>
-                    OR
-                </span>
-                <button className='w-full flex flex-row items-center justify-center gap-1 py-[8px] px-2 rounded-2xl text-white font-semibold mt-2 hover:opacity-80 transition-all delay-75 shadow-xl bg-[#3598db]'
-                    onClick={() => {
-                        loginWithGoogle()
-                    }}
-                >
-                    <AiOutlineGoogle size={20} fill={'white'} />
-                    Sign in with Google
-                </button>
-            </div>
         </div>
     )
 }

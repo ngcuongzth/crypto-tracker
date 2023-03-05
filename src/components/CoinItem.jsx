@@ -1,13 +1,19 @@
-import React from 'react'
-import { AiOutlineStar } from 'react-icons/ai'
+import React, { useState, useEffect } from 'react'
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 import { MdOutlineArrowDropUp, MdOutlineArrowDropDown } from 'react-icons/md'
 import { Sparklines, SparklinesLine, SparklinesSpots, SparklinesReferenceLine } from 'react-sparklines'
 import formatPrice from '../utils/formatPrice'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useAuthContext } from './AuthWrapper/AuthWrapper'
+
+
 
 const CoinItem = ({ coin }) => {
+    const { watchList } = useSelector(state => state.auth)
+    const { handleAddToWatchList, handleRemoveFromWatchList } = useAuthContext()
     const {
-        market_cap_rank: rank,
+        market_cap_rank,
         id,
         image,
         name,
@@ -20,15 +26,35 @@ const CoinItem = ({ coin }) => {
         price_change_percentage_24h_in_currency,
         price_change_percentage_7d_in_currency
     } = coin
+    const [isSaved, setIsSaved] = useState(false)
+
+    useEffect(() => {
+        const isSaved = watchList.find((coin) => {
+            return coin.id === id
+        })
+        setIsSaved(Boolean(isSaved))
+    }, [watchList])
 
     return (
         <tr className='h-14 border-b hover:item-hover-bg'>
             {/* star */}
             <td className='p-2 bg-transparent'>
-                <AiOutlineStar size={20} />
+                {isSaved ?
+                    <AiFillStar size={20} className="hover:scale-110 cursor-pointer fill-[#fc6]"
+                        onClick={() => {
+                            handleRemoveFromWatchList(id, watchList)
+                        }}
+                    />
+                    :
+                    <AiOutlineStar size={20} className="hover:scale-110 cursor-pointer"
+                        onClick={() => {
+                            handleAddToWatchList(coin, setIsSaved)
+                        }}
+                    />
+                }
             </td>
             {/* rank */}
-            <td className='p-2 bg-transparent'>{rank}</td>
+            <td className='p-2 bg-transparent'>{market_cap_rank}</td>
             {/* thumb & symbol */}
             <td className='p-2 bg-transparent'>
                 <Link to={`/coins/${id}`} className='flex  gap-1 flex-row items-center delay-100 transition-all ease-linear '>
@@ -49,7 +75,7 @@ const CoinItem = ({ coin }) => {
                         :
                         <MdOutlineArrowDropDown size={20} fill="#dc2626" />
                     }
-                    {(price_change_percentage_1h_in_currency).toFixed(1)}%
+                    {(price_change_percentage_1h_in_currency)?.toFixed(1)}%
                 </div>
             </td>
             {/* 24hour */}
@@ -60,7 +86,7 @@ const CoinItem = ({ coin }) => {
                         :
                         <MdOutlineArrowDropDown size={20} fill="#dc2626" />
                     }
-                    {(price_change_percentage_24h_in_currency).toFixed(1)}%
+                    {(price_change_percentage_24h_in_currency)?.toFixed(1)}%
                 </div>
             </td>
             {/* 7d */}
@@ -71,7 +97,7 @@ const CoinItem = ({ coin }) => {
                         :
                         <MdOutlineArrowDropDown size={20} fill="#dc2626" />
                     }
-                    {(price_change_percentage_7d_in_currency).toFixed(1)}%
+                    {(price_change_percentage_7d_in_currency)?.toFixed(1)}%
                 </div>
             </td>
             {/* total volume  */}

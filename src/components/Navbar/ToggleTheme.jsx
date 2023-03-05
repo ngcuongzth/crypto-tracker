@@ -12,7 +12,7 @@ const ToggleTheme = () => {
         <div className='flex items-center'>
             <button
                 onClick={() => dispatch(toggleTheme())}
-                className={colorTheme === 'light-theme' ? 'font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl' : 'hidden'}>
+                className={colorTheme === 'light-theme' ? 'font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-xl px-2' : 'hidden'}>
                 <HiMoon size={24} className="bg-transparent" />
                 <span className='hidden l:block'>
                     Dark
@@ -20,7 +20,7 @@ const ToggleTheme = () => {
             </button>
             <button
                 onClick={() => dispatch(toggleTheme())}
-                className={colorTheme === 'dark-theme' ? 'font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-2xl' : 'hidden'}>
+                className={colorTheme === 'dark-theme' ? 'font-medium flex items-center gap-1 capitalize  btn-normal l:rounded-xl px-2' : 'hidden'}>
                 <HiSun size={24} className="bg-transparent" />
                 <span className='hidden l:block'>
                     Light

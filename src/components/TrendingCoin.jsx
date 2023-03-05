@@ -8,6 +8,8 @@ import trending_3 from '../assets/images/trending_3.webp'
 import { AiOutlineSearch } from 'react-icons/ai'
 import { MdCategory, MdAddchart } from 'react-icons/md'
 
+
+
 const TrendingCoin = () => {
     const { trendingCoins } = useSelector(state => state.coin)
     return (
@@ -38,8 +40,6 @@ const TrendingCoin = () => {
                         Recently added
                     </div>
                 </Link>
-
-
             </div>
         </section>
     )

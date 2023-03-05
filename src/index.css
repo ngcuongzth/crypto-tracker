@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 .dark-theme {
-  --color-bg-primary: #121212;
+  --color-bg-primary: #303749;
   --color-bg-secondary: #283141;
   --color-text-primary: #dbdbdb;
   --color-text-secondary: #e2e8f0;
-  --color-bg-input: #4a5361;
-  --color-label: #6b7280;
+  --color-bg-input: #262626;
+  --color-label: #dbdbdb;
   --color-item-hover: #1e293b;
-  --color-border: #272828;
+  --color-border: #6b7280;
 }
 
 .light-theme {
@@ -18,13 +18,26 @@
   --color-bg-secondary: #edf2f7;
   --color-text-primary: #121212;
   --color-text-secondary: #4a5568;
-  --color-bg-input: #edf2f7;
+  --color-bg-input: #fff;
   --color-label: #6b7280;
   --color-item-hover: #f3f4f6;
   --color-border: #e5e7eb;
 }
 
 @layer base {
+  ::-webkit-scrollbar {
+    width: 8px;
+    @apply rounded-lg;
+  }
+
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    @apply rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gradient-to-b from-hover-color to-pink-400 rounded-lg;
+  }
   *,
   *:before,
   *:after {
@@ -34,6 +47,9 @@
     margin: 0;
     padding: 0;
     font: inherit;
+    background: inherit;
+    color: inherit;
+    scroll-behavior: smooth;
     @apply bg-primary text-primary antialiased;
   }
   img,
@@ -94,5 +110,8 @@
   }
   .tag {
     @apply bg-slate-700 rounded-xl font-medium py-1 px-2 text-white;
+  }
+  button {
+    @apply hover:scale-105;
   }
 }
