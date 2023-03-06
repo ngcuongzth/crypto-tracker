@@ -2,7 +2,7 @@ import React from 'react'
 import CoinSearch from '../components/CoinSearch'
 import TrendingCoin from '../components/TrendingCoin'
 import { useDispatch } from 'react-redux'
-import { fetchCoinMarket, fetchTrendingCoin, } from '../store/features/CoinSlice'
+import { fetchCoinMarket, fetchTrendingCoin, fetchTrendingSearch } from '../store/features/CoinSlice'
 import TableSkeleton from '../components/Loading/TableSkeleton'
 import TableCoin from '../components/TableCoin'
 import TrendingSkeleton from '../components/Loading/TrendingSkeleton'
@@ -15,6 +15,7 @@ const Home = () => {
     React.useEffect(() => {
         dispatch(fetchCoinMarket())
         dispatch(fetchTrendingCoin())
+        dispatch(fetchTrendingSearch())
     }, [])
     return (
         <div className='px-6 py-2 mt-4'>

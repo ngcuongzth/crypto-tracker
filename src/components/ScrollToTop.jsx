@@ -7,7 +7,7 @@ const ScrollToTop = () => {
 
 
     return (
-        <button className='fixed bottom-[50px] right-[30px] p-1 rounded-[50%] border border-border-color bg-white hover:scale-105 transition-transform'
+        <button className='fixed bottom-[50px] right-[30px] p-1 rounded-[50%] border border-border-color bg-white hover:scale-105 transition-transform z-[90]'
             onClick={() => {
                 handleScroll()
             }}

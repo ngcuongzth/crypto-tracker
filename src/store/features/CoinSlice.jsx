@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { coinMarketUrl, currencies, order, trendingCoinUrl } from "../../api/api";
-import { toast } from 'react-toastify'
+import { coinMarketUrl, currencies, order, trendingCoinUrl, trendingSearchUrl, searchCoinUrl } from "../../api/api";
 
 const initialState = {
     coins: [],
@@ -12,7 +11,10 @@ const initialState = {
     isLoadingCoinMarket: false,
     totalCoin: 0,
     isLoadingTrendingCoin: false,
-    isLoadingMore: false
+    isLoadingMore: false,
+    searchCoins: [],
+    trendingSearchCoins: [],
+    query: ''
 }
 export const fetchCoinMarket = createAsyncThunk(
     'coin/fetchCoinMarket',
@@ -57,12 +59,43 @@ export const fetchTrendingCoin = createAsyncThunk(
     }
 )
 
+export const fetchTrendingSearch = createAsyncThunk(
+    'coin/fetchTrendingSearch',
+    async (name, thunkAPI) => {
+        try {
+            const resp = await axios.get(trendingSearchUrl);
+            const data = resp.data;
+            return data.coins
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue('get trending search failure', err)
+        }
+    }
+)
+export const fetchSearchCoin = createAsyncThunk(
+    'coin/fetchSearchCoin',
+    async (name, thunkAPI) => {
+        const { query } = thunkAPI.getState().coin
+        try {
+            const resp = await axios.get(searchCoinUrl(query));
+            const data = resp.data;
+            return data.coins
+        }
+        catch (err) {
+            return thunkAPI.rejectWithValue('get coin by query failure', err)
+        }
+    }
+)
+
 export const CoinSlice = createSlice({
     initialState: initialState,
     name: 'coin',
     reducers: {
         increasePage: (state, action) => {
             state.tempPage = state.tempPage + 1
+        },
+        updateQuery: (state, action) => {
+            state.query = action.payload
         }
     }
     , extraReducers: (builder) => {
@@ -100,9 +133,15 @@ export const CoinSlice = createSlice({
         builder.addCase(fetchTrendingCoin.rejected, (state) => {
             state.isLoadingTrendingCoin = false;
         })
-
+        builder.addCase(fetchTrendingSearch.fulfilled, (state, action) => {
+            state.trendingSearchCoins = action.payload;
+        })
+        builder.addCase(fetchSearchCoin.fulfilled, (state, action) => {
+            state.searchCoins = action.payload;
+        })
     }
 })
 
+
 export default CoinSlice.reducer;
-export const { increasePage } = CoinSlice.actions
+export const { increasePage, updateQuery } = CoinSlice.actions

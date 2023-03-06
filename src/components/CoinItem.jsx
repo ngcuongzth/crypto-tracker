@@ -104,7 +104,8 @@ const CoinItem = ({ coin }) => {
             <td className='hidden l:table-cell p-2 bg-transparent'>{formatPrice(total_volume)}</td>
             <td className='hidden l:table-cell p-2 bg-transparent'>{formatPrice(market_cap)}</td>
             <td className='hidden m:table-cell bg-transparent'>
-                <Sparklines data={sparkline_in_7d.price} width={135} height={50}>
+
+                <Sparklines data={sparkline_in_7d && sparkline_in_7d.price} width={135} height={50}>
                     <SparklinesLine color={
                         price_change_percentage_7d_in_currency > 0 ? '#7acc16' : '#dc2626'
                     } />

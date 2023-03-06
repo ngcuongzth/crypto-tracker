@@ -11,7 +11,7 @@ export const navLinks = [
     {
         id: 2,
         title: 'Coin',
-        path: '/coin',
+        path: '/',
         icon: SiBitcoin
     },
     {

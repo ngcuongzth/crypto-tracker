@@ -25,7 +25,7 @@ const Account = () => {
         <div className='px-6 py-2'>
             <div className='s:flex  s:flex-row grid justify-between items-center my-8 py-4 rounded-xl'>
                 <div className='py-4'>
-                    <h2 className='text-2xl font-bold'>Your Account</h2>
+                    <h2 className='text-[24px] font-bold'>Your Account</h2>
                     {user &&
                         <div className='mt-2'>
                             <p className='font-medium flex flex-col gap-1 text-sm'>Welcome to CryptoTracker,
@@ -63,7 +63,7 @@ const Account = () => {
                 }
             </div>
             <div className=' rounded-2xl w-full min-h-[300px] my-12 py-8'>
-                <h3 className='capitalize text-2xl font-bold bg-transparent'>Watch list</h3>
+                <h3 className='capitalize text-[24px] font-bold bg-transparent'>Watch list</h3>
                 <SavedCoin />
             </div>
         </div>

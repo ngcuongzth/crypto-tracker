@@ -21,9 +21,7 @@ export const order = {
 export const coinMarketUrl = (currency, order, coin_per_page, page) => {
     return `${baseUrl}/coins/markets?vs_currency=${currency}&order=${order}&per_page=${coin_per_page}&page=${page}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
 }
-// export const globalUrl = () => {
-//     return `${baseUrl}/global`
-// } 
+
 
 export const trendingCoinUrl = "https://api.coingecko.com/api/v3/search/trending"
 
@@ -31,4 +29,8 @@ export const globalUrl = "https://api.coingecko.com/api/v3/global"
 
 export const detailCoinUrl = (idCoin) => {
     return `https://api.coingecko.com/api/v3/coins/${idCoin}?localization=false&sparkline=true`
+}
+export const trendingSearchUrl = "https://api.coingecko.com/api/v3/search/trending"
+export const searchCoinUrl = (query) => {
+    return `https://api.coingecko.com/api/v3/search?query=${query}`
 }

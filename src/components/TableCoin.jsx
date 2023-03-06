@@ -44,7 +44,7 @@ const TableCoin = () => {
                         dispatch(increasePage())
                         dispatch(fetchMoreCoin())
                     }}
-                    className='border px-2 py-1 transition-all  rounded-sm bg-hover-color text-white'>Load more 20 coins</button>
+                    className='border px-2 py-1 transition-all  rounded-xl bg-hover-color text-white'>Load more 20 coins</button>
             </div>
         </div>
     )
