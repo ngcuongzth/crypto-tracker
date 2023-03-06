@@ -13,10 +13,8 @@ const SignUpForm = () => {
     const [error, setError] = useState('')
     const navigate = useNavigate()
 
-    console.log(error)
     const handleSubmit = async () => {
         const errorMessage = await handleRegister(email, password)
-        console.log(errorMessage)
         if (!errorMessage) {
             navigate('/account')
             toast.success('Registered ❕')
