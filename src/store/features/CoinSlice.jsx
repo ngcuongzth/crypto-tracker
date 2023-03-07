@@ -7,7 +7,6 @@ const initialState = {
     trendingCoins: [],
     page: 1,
     tempPage: 1,
-    totalPages: 0,
     isLoadingCoinMarket: false,
     totalCoin: 0,
     isLoadingTrendingCoin: false,
@@ -96,6 +95,9 @@ export const CoinSlice = createSlice({
         },
         updateQuery: (state, action) => {
             state.query = action.payload
+        },
+        setDefaultPage: (state) => {
+            state.tempPage = 1;
         }
     }
     , extraReducers: (builder) => {
@@ -144,4 +146,4 @@ export const CoinSlice = createSlice({
 
 
 export default CoinSlice.reducer;
-export const { increasePage, updateQuery } = CoinSlice.actions
+export const { increasePage, updateQuery, setDefaultPage } = CoinSlice.actions
